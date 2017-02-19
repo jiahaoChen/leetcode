@@ -1,3 +1,7 @@
+/*
+dp Solution
+http://www.geeksforgeeks.org/dynamic-programming-set-12-longest-palindromic-subsequence/
+*/
 class Solution {
 public:
     int longestPalindromeSubseq(string s) {
