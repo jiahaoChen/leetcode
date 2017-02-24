@@ -26,15 +26,16 @@ c) a[j..r] contains all elements greater than pivot */
 //It uses Dutch National Flag Algorithm
 void partition(int a[], int low, int high, int &i, int &j)
 {
-	// To handle 2 elements
-	if (high - low <= 1)
-	{
-		if (a[high] < a[low])
-			swap(&a[high], &a[low]);
-		i = low;
-		j = high;
-		return;
-	}
+	// // To handle 2 elements
+	// if (high <= low)
+	// {
+	// 	if (a[high] < a[low])
+	// 		swap(&a[high], &a[low]);
+	// 	i = low;
+	// 	j = high;
+	// 	printf("high < low!!!\n\n\n");
+	// 	return;
+	// }
 
 	int mid = low;
 	int pivot = a[high];
@@ -72,11 +73,14 @@ void quicksort(int a[], int low, int high)
 // Driver program
 int main()
 {
-	int a[] = {4, 9, 4, 4, 1, 9, 4, 4, 9, 4, 4, 1, 4};
-	//int a[] = {4, 39, 54, 14, 31, 89, 44, 34, 59, 64, 64, 11, 41};
-	//int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	//int a[] = {91, 82, 73, 64, 55, 46, 37, 28, 19, 10};
-	//int a[] = {4, 9, 4, 4, 9, 1, 1, 1};
+	// int a[] = {4, 9, 4, 4, 1, 9, 4, 4, 9, 4, 4, 1, 4};
+	// int a[] = {4, 39, 54, 14, 31, 89, 44, 34, 59, 64, 64, 11, 41};
+	// int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	// int a[] = {91, 82, 73, 64, 55, 46, 37, 28, 19, 10};
+	// int a[] = {4, 9, 4, 4, 9, 1, 1, 1};
+	// int a[] = {2,2,3,4,3,2,3,4,4,2,3,4,5,2,3,4,6,3,2,4};
+	// int a[] = {2,1};
+	int a[] = {0};
 	int size = sizeof(a) / sizeof(int);
 
 	printarr(a, size);
