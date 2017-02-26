@@ -2,12 +2,11 @@
 // #include <bits/stdc++.h>
 #include <stdio.h>
 // using namespace std;
-
-void swap(int *a, int *b)
+void swap(int* a, int* b)
 {
-	int temp = *a;
+	int t = *a;
 	*a = *b;
-	*b = temp;
+	*b = t;
 }
 
 // A utility function to print an array
@@ -26,46 +25,28 @@ c) a[j..r] contains all elements greater than pivot */
 //It uses Dutch National Flag Algorithm
 void partition(int a[], int low, int high, int &i, int &j)
 {
-	// // To handle 2 elements
-	// if (high <= low)
-	// {
-	// 	if (a[high] < a[low])
-	// 		swap(&a[high], &a[low]);
-	// 	i = low;
-	// 	j = high;
-	// 	printf("high < low!!!\n\n\n");
-	// 	return;
-	// }
-
-	int mid = low;
 	int pivot = a[high];
+	int mid = low;
 	while (mid <= high)
 	{
-		if (a[mid]<pivot)
-			swap(&a[low++], &a[mid++]);
-		else if (a[mid]==pivot)
-			mid++;
-		else if (a[mid]>pivot)
+		if (a[mid] > pivot)
 			swap(&a[mid], &a[high--]);
+		else if (a[mid] == pivot)
+			mid++;
+		else
+			swap(&a[mid++], &a[low++]);
 	}
-
-	//update i and j
 	i = low-1;
-	j = mid; //or high-1
+	j = mid;
 }
 
 // 3-way partition based quick sort
 void quicksort(int a[], int low, int high)
 {
-	if (low>=high) //1 or 0 elements
+	if (high <= low)
 		return;
-
 	int i, j;
-
-	// Note that i and j are passed as reference
 	partition(a, low, high, i, j);
-
-	// Recur two halves
 	quicksort(a, low, i);
 	quicksort(a, j, high);
 }
@@ -78,9 +59,9 @@ int main()
 	// int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	// int a[] = {91, 82, 73, 64, 55, 46, 37, 28, 19, 10};
 	// int a[] = {4, 9, 4, 4, 9, 1, 1, 1};
-	// int a[] = {2,2,3,4,3,2,3,4,4,2,3,4,5,2,3,4,6,3,2,4};
+	int a[] = {2,2,3,4,3,2,3,4,4,2,3,4,5,2,3,4,6,3,2,4};
 	// int a[] = {2,1};
-	int a[] = {0};
+	// int a[] = {0};
 	int size = sizeof(a) / sizeof(int);
 
 	printarr(a, size);

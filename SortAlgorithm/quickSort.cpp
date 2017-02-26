@@ -17,24 +17,22 @@ to left of pivot and all greater elements to right
 of pivot */
 int partition (int arr[], int low, int high)
 {
-	int pivot = arr[high]; // pivot
-	int i = (low - 1); // Index of smaller element
-
-	for (int j = low; j <= high- 1; j++)
+	int pivot = arr[high];
+	int mid = low;
+	int index = high;
+	while (mid < high)
 	{
-		// If current element is smaller than or
-		// equal to pivot
-		if (arr[j] <= pivot)
+		if (arr[mid] > pivot)
 		{
-			i++; // increment index of smaller element
-			cout << "swap: " << arr[i] << " " << arr[j] << endl;
-			cout << "i: " << i << "  j: " << j << endl;
-			swap(&arr[i], &arr[j]);
+			swap(&arr[mid], &arr[--high]);
+		}
+		else if (arr[mid] <= pivot)
+		{
+			swap(&arr[mid++], &arr[low++]);
 		}
 	}
-	cout << "swap: " << arr[i+1] << " " << arr[high] << endl;
-	swap(&arr[i + 1], &arr[high]);
-	return (i + 1);
+	swap(&arr[mid], &arr[index]);
+	return mid;
 }
 
 /* The main function that implements QuickSort
@@ -43,17 +41,11 @@ low --> Starting index,
 high --> Ending index */
 void quickSort(int arr[], int low, int high)
 {
-	if (low < high)
-	{
-		/* pi is partitioning index, arr[p] is now
-		at right place */
-		int pi = partition(arr, low, high);
-
-		// Separately sort elements before
-		// partition and after partition
-		quickSort(arr, low, pi - 1);
-		quickSort(arr, pi + 1, high);
-	}
+	if (high <= low)
+		return;
+	int mid = partition(arr, low, high);
+	quickSort(arr, low, mid-1);
+	quickSort(arr, mid+1, high);
 }
 
 /* Function to print an array */
@@ -68,7 +60,8 @@ void printArray(int arr[], int size)
 // Driver program to test above functions
 int main()
 {
-	int arr[] = {10, 7, 8, 9, 1, 5};
+	// int arr[] = {10, 7, 8, 9, 1, 5};
+	int arr[] = {2,2,3,4,3,2,3,4,4,2,3,4,5,2,3,4,6,3,2,4};
 	int n = sizeof(arr)/sizeof(arr[0]);
 	printf("Input array: \n");
 	printArray(arr, n);
