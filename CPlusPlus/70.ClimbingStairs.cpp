@@ -1,20 +1,14 @@
-/*
-dp solution
-*/
 class Solution {
 public:
     int climbStairs(int n) {
-        int *dp = new int[n+1];
-        dp[0] = 1;
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 2; i <= n; ++i)
-        {
-            dp[i] = dp[i-1] + dp[i-2];
+        if(n == 0) return 1;
+        if (n <= 2) return n;
+        int ret[3] = {1,2,0};
+        for (int i = 3; i < n+1; ++i) {
+            ret[2] = ret[0] + ret[1];
+            ret[0] = ret[1];
+            ret[1] = ret[2];
         }
-        
-        int ret = dp[n];
-        delete [] dp;
-        return ret;
+        return ret[2];
     }
 };

@@ -9,39 +9,43 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        if (!head || !head->next)
-            return head;
-        ListNode *fast = head, *slow = head, *pre = head;
-        while(fast != NULL && fast->next != NULL)
-        {
+        if (!head || !head->next) return head;
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* pre = head;
+        // don't use fast->next && fast->next->next, O->O will error
+        while (fast && fast->next) {
             pre = slow;
-            fast = fast->next->next;
             slow = slow->next;
+            fast = fast->next->next;
         }
         pre->next = NULL;
         ListNode* A = sortList(slow);
         ListNode* B = sortList(head);
         return merge(A, B);
+
     }
-    
+
     ListNode* merge(ListNode* A, ListNode* B) {
-        ListNode* ret = new ListNode(0), *p = ret;
-        while(A != NULL && B != NULL)
-        {
+        ListNode* newNode = new ListNode(0);
+        ListNode* currNode = newNode;
+        while(A && B) {
             if (A->val <= B->val) {
-                p->next = A;
+                currNode->next = A;
                 A = A->next;
-            }
-            else {
-                p->next = B;
+            } else {
+                currNode->next = B;
                 B = B->next;
             }
-            p = p->next;
+            currNode = currNode->next;
         }
-        if (A != NULL)
-            p->next = A;
-        if (B != NULL)
-            p->next = B;
-        return ret->next;
+        if (A) {
+            currNode->next = A;
+        }
+        if (B) {
+            currNode->next = B;
+        }
+        return newNode->next;
     }
 };
