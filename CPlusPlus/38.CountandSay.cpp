@@ -1,27 +1,21 @@
 class Solution {
 public:
     string countAndSay(int n) {
+        if (!n) return "";
         string ret = "1";
-        if (n <= 1)
-            return ret;
-        int count = 1;
-        for (int i = 1; i < n; ++i)
-        {
-            string curr = ret;
+        string curr = "1";
+        for (int i = 1; i < n; ++i) {
+            int len = curr.size();
             ret = "";
-            for (int j = 0; j < curr.size(); ++j)
-            {
-                if (j+1 == curr.size() || curr[j] != curr[j+1])
-                {
-                    ret += to_string(count);
-                    ret += curr[j];
-                    count = 1;
-                }
-                else
-                {
+            for (int j = 0; j < len; j++) {
+                int count = 1;
+                while (j+1 < len && curr[j] == curr[j+1]) {
                     count++;
+                    j++;
                 }
+                ret = ret + to_string(count) + curr[j];
             }
+            curr = ret;
         }
         return ret;
     }
